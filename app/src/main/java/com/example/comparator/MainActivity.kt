@@ -4,36 +4,36 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import com.example.comparator.ui.theme.ComparatorTheme
+import com.example.comparator.viewModel.HomeScreenViewModel
+import com.example.comparator.views.HomeScreen
+import com.example.comparator.viewModel.SearchItemViewModel
+
 
 class MainActivity : ComponentActivity() {
+
+    val homescreenVM = HomeScreenViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             //Text("Hello World!")
             //MessageCard(Message("Android", "Jetpack Compose"))
-            SearchBar(query = doodle) {
-                
-            }
+            HomeScreen(homescreenVM)
         }
     }
 }
@@ -53,63 +53,34 @@ fun MessageCard(msg: Message) {
         }
     }
 }
-
 @Composable
-fun ProcudctSearher(){}
+fun SearchItem(searchItemVM: SearchItemViewModel) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        elevation = CardDefaults.cardElevation(4.dp),
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Column {
+            Image(
+                painter = Painter(searchItemVM.imageUrl),
+                contentDescription = searchItemVM.description,
+                modifier = Modifier
+                    .height(120.dp)
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(4.dp))
+            )
 
-@Preview
-@Composable
-fun PreviewMessageCard() {
-    MessageCard(msg = Message("Lexi", "Hey, take a look at Jetpack Compose, it's great!"))
-}
+            Spacer(modifier = Modifier.height(16.dp))
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
+            Text(
+                searchItemVM.description
+            )
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComparatorTheme {
-        Greeting("Android")
-    }
-}
+            Spacer(modifier = Modifier.height(8.dp))
 
-@Composable
-fun SearchBar(
-    query: String,
-    onQueryChange: (String) -> Unit
-) {
-    var isSearching by remember { mutableStateOf(false) }
-
-    BasicTextField(
-        value = query,
-        onValueChange = {
-            onQueryChange(it)
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White)
-            .padding(8.dp),
-        textStyle = TextStyle(color = Color.Black),
-        cursorBrush = SolidColor(Color.Black),
-        singleLine = true,
-        maxLines = 1,
-    )
-}
-
-@Preview
-@Composable
-fun SearchBarPreview() {
-    var query by remember { mutableStateOf("") }
-    SearchBar(
-        query = query,
-        onQueryChange = { newQuery ->
-            query = newQuery
+            Text(
+                "€${searchItemVM.price * searchItemVM.quantity}"
+            )
         }
-    )
+    }
 }
