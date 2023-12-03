@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Comparator</string>
     <string name="search_bar_string">product search :</string>
-    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_home_screen" translatable="false">HomeScreen</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

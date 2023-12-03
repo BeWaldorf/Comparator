@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.comparator.R
 import com.example.comparator.viewModel.SearchItemViewModel
 
@@ -40,13 +41,10 @@ class SearchItemView (private val itemVM: SearchItemViewModel){
     fun searchItemCardContent (){
         val image = painterResource(id = R.drawable.img)
         Row{
-            Image(
-                painter = image,
-                contentDescription = "Product Image",
-                modifier = Modifier
-                    .height(120.dp)
-                    .width(120.dp)
-                    .clip(RoundedCornerShape(4.dp))
+            AsyncImage(
+                model = itemVM.getImageUrl(),
+                contentDescription = null,
+                modifier = Modifier.width(200.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Column {
