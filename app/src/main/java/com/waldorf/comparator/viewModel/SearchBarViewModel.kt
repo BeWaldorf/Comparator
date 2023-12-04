@@ -1,9 +1,9 @@
-package com.example.comparator.viewModel
+package com.waldorf.comparator.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.comparator.ui.HomeScreenUiState
+import com.waldorf.comparator.ui.HomeScreenUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

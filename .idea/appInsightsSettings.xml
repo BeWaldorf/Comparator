@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.waldorf.comparator" />
+                  <option name="mobileSdkAppId" value="1:462892143439:android:42aeb983df0b0382b66b3a" />
+                  <option name="projectId" value="comparator-dc004" />
+                  <option name="projectNumber" value="462892143439" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

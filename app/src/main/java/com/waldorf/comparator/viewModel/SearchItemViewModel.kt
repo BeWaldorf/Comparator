@@ -1,7 +1,7 @@
-package com.example.comparator.viewModel
+package com.waldorf.comparator.viewModel
 
 import androidx.compose.runtime.mutableStateListOf
-import com.example.comparator.model.SearchItem
+import com.waldorf.comparator.model.SearchItem
 
 class SearchItemViewModel {
 

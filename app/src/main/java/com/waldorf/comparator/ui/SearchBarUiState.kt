@@ -1,4 +1,4 @@
-package com.example.comparator.ui
+package com.waldorf.comparator.ui
 
 data class SearchBarUiState (
     val currentSearch: String = "",

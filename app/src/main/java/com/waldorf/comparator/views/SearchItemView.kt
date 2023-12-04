@@ -1,4 +1,4 @@
-package com.example.comparator.views
+package com.waldorf.comparator.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -19,8 +19,8 @@ import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.comparator.R
-import com.example.comparator.viewModel.SearchItemViewModel
+import com.waldorf.comparator.R
+import com.waldorf.comparator.viewModel.SearchItemViewModel
 
 
 

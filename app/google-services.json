@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "462892143439",
+    "project_id": "comparator-dc004",
+    "storage_bucket": "comparator-dc004.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462892143439:android:42aeb983df0b0382b66b3a",
+        "android_client_info": {
+          "package_name": "com.waldorf.comparator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSik8bumVKXtBO_O2jA_aGDdlNmoxgCLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

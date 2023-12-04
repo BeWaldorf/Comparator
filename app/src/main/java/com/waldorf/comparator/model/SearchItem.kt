@@ -1,4 +1,4 @@
-package com.example.comparator.model
+package com.waldorf.comparator.model
 
 data class SearchItem(
     val id: Int,

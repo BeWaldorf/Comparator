@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Comparator</string>
+    <string name="app_name">Comparator</string>
     <string name="search_bar_string">product search :</string>
     <string name="title_activity_home_screen" translatable="false">HomeScreen</string>
     <!-- TODO: Remove or change this placeholder text -->

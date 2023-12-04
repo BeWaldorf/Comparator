@@ -1,4 +1,4 @@
-package com.example.comparator.model
+package com.waldorf.comparator.model
 
 import kotlinx.serialization.Serializable
 

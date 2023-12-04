@@ -1,4 +1,4 @@
-package com.example.comparator.service
+package com.waldorf.comparator.service
 
 import android.provider.ContactsContract.CommonDataKinds.Website.URL
 import okhttp3.OkHttpClient

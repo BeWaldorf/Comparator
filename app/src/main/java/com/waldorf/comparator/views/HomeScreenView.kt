@@ -1,4 +1,4 @@
-package com.example.comparator.views
+package com.waldorf.comparator.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,10 +24,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.comparator.R
-import com.example.comparator.viewModel.HomeScreenViewModel
-import com.example.comparator.viewModel.SearchBarViewModel
-import com.example.comparator.viewModel.SearchItemViewModel
+import com.waldorf.comparator.R
+import com.waldorf.comparator.viewModel.HomeScreenViewModel
+import com.waldorf.comparator.viewModel.SearchBarViewModel
+import com.waldorf.comparator.viewModel.SearchItemViewModel
 
 class HomeScreenView(private val viewModel: HomeScreenViewModel){
     private val _searchItemView:SearchItemView = SearchItemView(SearchItemViewModel(69))
