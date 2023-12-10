@@ -1,5 +1,6 @@
 package com.waldorf.comparator.model
 
+
 data class SearchItem(
     val id: Int,
     val title: String,
