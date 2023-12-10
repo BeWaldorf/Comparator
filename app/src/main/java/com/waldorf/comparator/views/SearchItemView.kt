@@ -1,8 +1,10 @@
-package com.waldorf.comparator.view
+package com.waldorf.comparator.views
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -12,19 +14,18 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.waldorf.comparator.R
 import com.waldorf.comparator.viewModel.SearchItemViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
-@AndroidEntryPoint
-class SearchItemView @Inject constructor(
-    private val itemVM: SearchItemViewModel
-){
+
+class SearchItemView (private val itemVM: SearchItemViewModel){
+
     @Composable
     fun searchItemCard(){
         Card(

@@ -7,20 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.waldorf.comparator.view.HomeScreenView
 import com.waldorf.comparator.viewModel.HomeScreenViewModel
-import com.waldorf.comparator.viewModel.SearchItemViewModel
-import com.waldorf.comparator.viewModel.SearchItemViewModelFactory
+import com.waldorf.comparator.views.HomeScreenView
+import com.waldorf.comparator.service.LoginService
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity @Inject constructor(
-   private val _homeScreenView: HomeScreenView
-): ComponentActivity() {
-    //private val _homeScreenView:HomeScreenView = HomeScreenView()
+class MainActivity : ComponentActivity() {
+    private val _homeScreenView:HomeScreenView = HomeScreenView(HomeScreenViewModel())
     val homeScreenView: HomeScreenView get() = _homeScreenView
-    //@Inject lateinit var homeScreenView : HomeScreenView
 
 
     public override fun onStart() {

@@ -1,4 +1,4 @@
-package com.waldorf.comparator.view
+package com.waldorf.comparator.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,26 +27,17 @@ import androidx.compose.ui.unit.sp
 import com.waldorf.comparator.R
 import com.waldorf.comparator.viewModel.HomeScreenViewModel
 import com.waldorf.comparator.viewModel.SearchBarViewModel
-import com.waldorf.comparator.viewModel.SearchItemViewModelFactory
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import com.waldorf.comparator.viewModel.SearchItemViewModel
 
-@AndroidEntryPoint
-class HomeScreenView @Inject constructor(
-    private val searchItemViewModelFactory: SearchItemViewModelFactory,
-    private val viewModel: HomeScreenViewModel
-){
-    private val _searchItemView:SearchItemView = SearchItemView(searchItemViewModelFactory.create(30))
+class HomeScreenView(private val viewModel: HomeScreenViewModel){
+    private val _searchItemView:SearchItemView = SearchItemView(SearchItemViewModel(69))
     val searchItemView: SearchItemView get() = _searchItemView
-
-    //@Inject lateinit var viewModel : HomeScreenViewModel
-
 
     @Composable
     fun doodleNoodle(){}
 
     @Composable
-    fun HomeScreen() {
+    fun HomeScreen(){
         val mediumPadding = 16.dp
         Column(
             modifier = Modifier
@@ -66,7 +57,7 @@ class HomeScreenView @Inject constructor(
                 verticalArrangement = Arrangement.spacedBy(mediumPadding),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                SearchBar(viewModel.searchBarVM, onUpdateViewModel = { newSearchBarViewModel ->
+                SearchBar(viewModel.searchBarVM, onUpdateViewModel = {newSearchBarViewModel ->
                     viewModel.searchBarVM = newSearchBarViewModel
                 })
                 OutlinedButton(
@@ -85,32 +76,32 @@ class HomeScreenView @Inject constructor(
 
     @Composable
     fun SearchBar(searchBarViewModel: SearchBarViewModel, onUpdateViewModel: (SearchBarViewModel) -> Unit) {
-       var isSearching by remember { mutableStateOf(false) }
-       var searchText by remember { mutableStateOf("") }
+        var isSearching by remember { mutableStateOf(false) }
+        var searchText by remember { mutableStateOf("") }
 
-       OutlinedTextField(
-           value = searchText,
-           singleLine = true,
-           shape = MaterialTheme.shapes.large,
-           modifier = Modifier.fillMaxWidth(),
-           colors = TextFieldDefaults.colors(
-               focusedContainerColor = MaterialTheme.colorScheme.surface,
-               unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-               disabledContainerColor = MaterialTheme.colorScheme.surface,
-           ),
-           onValueChange = {
-               searchText = it
-               searchBarViewModel.updateSearchTerm(searchText)
-               onUpdateViewModel(searchBarViewModel)
-           },
-           label = { Text(stringResource(id = R.string.search_bar_string)) },
-           isError = false,
-           keyboardOptions = KeyboardOptions.Default.copy(
-               imeAction = ImeAction.Done
-           ),
-           keyboardActions = KeyboardActions(
-               onDone = { }
-           )
-       )
+        OutlinedTextField(
+            value = searchText,
+            singleLine = true,
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier.fillMaxWidth(),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                disabledContainerColor = MaterialTheme.colorScheme.surface,
+            ),
+            onValueChange = {
+                searchText = it
+                searchBarViewModel.updateSearchTerm(searchText)
+                onUpdateViewModel(searchBarViewModel)
+            },
+            label = { Text(stringResource(id = R.string.search_bar_string)) },
+            isError = false,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = { }
+            )
+        )
     }
 }

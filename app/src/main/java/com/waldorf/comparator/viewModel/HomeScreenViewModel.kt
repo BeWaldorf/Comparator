@@ -5,15 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.waldorf.comparator.ui.HomeScreenUiState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeScreenViewModel @Inject constructor()
-     : ViewModel() {
+
+class HomeScreenViewModel: ViewModel() {
     var searchBarVM = SearchBarViewModel()
     private val _uiState = MutableStateFlow(HomeScreenUiState())
 
