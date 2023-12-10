@@ -1,32 +1,16 @@
 package com.waldorf.comparator.viewModel
 
-import androidx.lifecycle.ViewModel
+import androidx.compose.runtime.mutableStateListOf
 import com.waldorf.comparator.model.SearchItem
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class SearchItemViewModel @AssistedInject constructor(
-    @Assisted private val testFlag: Int? = null
-) : ViewModel()  {
-
-    interface AssistedFactory {
-        fun getTestFlag(): Int?
-    }
+class SearchItemViewModel {
 
     private var _searchItem: SearchItem? = null
     val searchItem: SearchItem? get() = _searchItem
 
-    init {
-        //val testFlag = assistedFactory.getTestFlag()
+    constructor(testFlag: Int? = null) {
         if(testFlag != null){
-            this._searchItem = SearchItem(1,
-                "DoodleNoodle",
-                "https://fastly.picsum.photos/id/910/536/354.jpg?hmac=tLOqOtDz3JUSQJfmxCuOdD54ipTd47kjh5FTgR2gCwQ",
-                "€69,69")
+            this._searchItem = SearchItem(1, "DoodleNoodle", "https://fastly.picsum.photos/id/910/536/354.jpg?hmac=tLOqOtDz3JUSQJfmxCuOdD54ipTd47kjh5FTgR2gCwQ","€69,69")
         }
     }
 
@@ -50,9 +34,4 @@ class SearchItemViewModel @AssistedInject constructor(
     fun getFullPriceString(): String? {
         return searchItem?.fullPriceString
     }
-}
-
-@AssistedFactory
-interface SearchItemViewModelFactory {
-    fun create(testFlag: Int?): SearchItemViewModel
 }
