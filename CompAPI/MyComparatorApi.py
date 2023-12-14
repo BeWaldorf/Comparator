@@ -5,7 +5,8 @@ from SearchItem import SearchItem
 import json
 
 class ComparatorApi:
-    req_URL: str 
+    req_URL: dict[str, str]
+    headers: dict
     myComparatorApi: Flask 
     page: Response
     soup: BeautifulSoup
@@ -13,35 +14,64 @@ class ComparatorApi:
     
     
     def __init__(self) -> None:
-        self.req_URL = "https://www.amazon.com.be/s?k="
+        self.req_URL = {"BE":   "https://www.amazon.com.be/s?k=",
+                        "FR":   "https://www.amazon.fr/s?k=", 
+                        "DE":   "https://www.amazon.de/s?k=",
+                        "NL":   "https://www.amazon.nl/s?k=", 
+                        "JP":   "https://www.amazon.co.jp/s?k=",
+                        "COM":  "https://www.amazon.com/s?k="
+                        }
         self.myComparatorApi = Flask(__name__)
         
         @self.myComparatorApi.route("/")
         def index():
             return "Hello World!"
         
-        @self.myComparatorApi.route("/browser_search/<string:search_term>")
-        def search(search_term):
-            full_URL:str = self.req_URL + search_term
-            self.page = req_get(full_URL)
+        @self.myComparatorApi.route("/browser_search/<string:country_code>/<string:search_term>")
+        def search(country_code, search_term):
+            full_URL:str = self.req_URL[country_code] + search_term
+            headers = {'authority': 'www.amazon.com',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'dnt': '1',
+                'upgrade-insecure-requests': '1',
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'sec-fetch-site': 'none',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-dest': 'document',
+                'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/119.0.2151.97"
+                }
+            self.page = req_get(full_URL, headers=headers)
             self.soup = BeautifulSoup(self.page.content, "html.parser")
             self.search_results = self.soup.find_all(attrs={"data-component-type": "s-search-result"})
             result_items: list[SearchItem] = self.pretty_results(self.search_results)
-            print(result_items)
             return self.generate_html_table(result_items)
         
-        @self.myComparatorApi.route("/api_search/<string:search_term>")
-        def api_search(search_term):
-            full_URL:str = self.req_URL + search_term
-            self.page = req_get(full_URL)
+        @self.myComparatorApi.route("/api_search/<string:country_code>/<string:search_term>")
+        def api_search(country_code, search_term):
+            full_URL:str = self.req_URL[country_code]+ search_term
+            headers = {'authority': 'www.amazon.com',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'dnt': '1',
+                'upgrade-insecure-requests': '1',
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'sec-fetch-site': 'none',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-dest': 'document',
+                'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/119.0.2151.97"
+                }
+            self.page = req_get(full_URL, headers=headers)
             self.soup = BeautifulSoup(self.page.content, "html.parser")
             self.search_results = self.soup.find_all(attrs={"data-component-type": "s-search-result"})
             result_items_str:str = self.scrape_processor(self.search_results)
             return result_items_str
     
-    def scrape_processor(self, results:list[Tag]) -> list[SearchItem]:
-        itemList: list[SearchItem] = []
-        for result in results:
+    def scrape_processor(self, results:list[Tag]) -> list[dict]:
+        itemList: list[dict] = []
+        for result in results[:5]:
             # Extracting price elements
             price_whole_element = result.find("span", class_="a-price-whole")
             price_fraction_element = result.find("span", class_="a-price-fraction")
@@ -77,13 +107,14 @@ class ComparatorApi:
 
             # Create SearchItem instance
             search_item = SearchItem(title, price, image_url, shipping_price, link)
-            itemList.append(search_item)
+            item_dict = search_item.serializer()
+            itemList.append(item_dict)
         return json.dumps(itemList)
 
-    #search_results = soup.find_all(attrs={"data-component-type": "s-search-result"})
+
     def pretty_results(self, results: list) -> list[SearchItem]:
         itemList: list[SearchItem] = []
-        for result in results:
+        for result in results[:5]:
             # Extracting price elements
             price_whole_element = result.find("span", class_="a-price-whole")
             price_fraction_element = result.find("span", class_="a-price-fraction")

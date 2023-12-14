@@ -8,6 +8,14 @@ class SearchItem():
         self.delivery_price : str = delivery_price
         self.link : str = link
 
+    def serializer(self)->dict:
+        return {
+            "name": self.name,
+            "price": self.price,
+            "image_link": self.image_link,
+            "delivery_price": self.delivery_price
+        }
+
     def getName(self):
         return self.name
 
