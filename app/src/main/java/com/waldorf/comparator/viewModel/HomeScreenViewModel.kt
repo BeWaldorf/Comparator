@@ -1,27 +1,26 @@
 package com.waldorf.comparator.viewModel
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.waldorf.comparator.model.SearchItem
+import com.waldorf.comparator.ui.ApiUIState
 import com.waldorf.comparator.ui.HomeScreenUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 
 class HomeScreenViewModel: ViewModel() {
-    var searchBarVM = SearchBarViewModel()
-    private val _uiState = MutableStateFlow(HomeScreenUiState())
-
-
-    val uiState: StateFlow<HomeScreenUiState> = _uiState.asStateFlow()
-
-    private val _searchBarViewModel: MutableLiveData<SearchBarViewModel> =  MutableLiveData<SearchBarViewModel>()
-    val searchBarViewModel: LiveData<SearchBarViewModel> get()= _searchBarViewModel
-    fun setSearchBarViewModel(searchBarViewModel: SearchBarViewModel) {
-        _searchBarViewModel.value = searchBarViewModel
-    }
-
-    init{}
+   private val _uiState = MutableStateFlow(HomeScreenUiState(true))
+   val uiState: MutableStateFlow<HomeScreenUiState> = _uiState
 }
+
+
+//   fun searchForItem(){
+//     viewModelScope.launch{
+//         _apiVM.makeApiCall()
+//     }
+//   }

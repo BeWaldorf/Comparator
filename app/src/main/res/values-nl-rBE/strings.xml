@@ -2,4 +2,11 @@
 <resources>
     <string name="app_name">Comparator</string>
     <string name="search_bar_string">Zoek producten:</string>
+    <string name="hello_blank_fragment">hallo leeg fragment</string>
+    <string name="loading">Laden</string>
+    <string name="loading_failed">loading error</string>
+    <string name="retry">herprobeer</string>
+    <string name="search_button">Zoek</string>
+    <string name="back">Terug</string>
+    <string name="detail">Details</string>
 </resources>
